@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myclinic/data/auth/login_service.dart';
-import 'package:myclinic/screens/reset_password_screen.dart';
+import 'package:myclinic/screens/auth/reset_password_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 import 'package:myclinic/utils/helpers/validation.dart';
 
@@ -82,28 +82,30 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        elevation: 0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("You do not have an account?"),
-            const SizedBox(
-              width: 4,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, "/signup");
-              },
-              child: const Text(
-                "Signup",
-                style: TextStyle(color: KColors.accentColor),
+      bottomNavigationBar: (loading == false)
+          ? BottomAppBar(
+              color: Colors.white,
+              elevation: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("You do not have an account?"),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/signup");
+                    },
+                    child: const Text(
+                      "Signup",
+                      style: TextStyle(color: KColors.accentColor),
+                    ),
+                  )
+                ],
               ),
             )
-          ],
-        ),
-      ),
+          : null,
       appBar: AppBar(),
       backgroundColor: Colors.white,
       body: Padding(

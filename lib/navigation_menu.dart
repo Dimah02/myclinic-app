@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myclinic/screens/home_screen.dart';
-import 'package:myclinic/screens/profile_screen.dart';
+import 'package:myclinic/screens/app/clinics_screen.dart';
+import 'package:myclinic/screens/app/home_screen.dart';
+import 'package:myclinic/screens/app/profile_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -100,7 +101,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    Container(),
+    const ClinicsScreen(),
     Container(),
     const ProfileScreen(),
   ];

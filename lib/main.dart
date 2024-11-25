@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myclinic/navigation_menu.dart';
-import 'package:myclinic/screens/login_screen.dart';
-import 'package:myclinic/screens/signup_screen.dart';
-import 'package:myclinic/screens/signup_second_screen.dart';
+import 'package:myclinic/screens/auth/login_screen.dart';
+import 'package:myclinic/screens/auth/signup_screen.dart';
+import 'package:myclinic/screens/auth/signup_second_screen.dart';
 import 'package:myclinic/utils/theme/theme.dart';
 
 void main() {
