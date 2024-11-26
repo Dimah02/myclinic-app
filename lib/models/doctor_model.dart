@@ -28,7 +28,8 @@ class DoctorModel {
         reviews: (json['reviews'] as List<dynamic>?)
             ?.map((e) => Review.fromJson(e))
             .toList(),
-        averageRating: json['averageRating'] as double? ?? 0.0,
+        averageRating:
+            json['averageRating'] != null ? json['averageRating'] + .0 : 0.0,
         appointments: (json['appointments'] as List<dynamic>?)
             ?.map((e) => Appointment.fromJson(e))
             .toList(),
