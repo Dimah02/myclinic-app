@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myclinic/screens/app/clinics_screen.dart';
+import 'package:myclinic/screens/app/history_screen.dart';
 import 'package:myclinic/screens/app/home_screen.dart';
 import 'package:myclinic/screens/app/profile_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
@@ -21,7 +22,13 @@ class NavigationMenu extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return const HistoryScreen();
+                  },
+                ));
+              },
               icon: const Icon(
                 Icons.history_rounded,
                 color: KColors.bestGrey,
