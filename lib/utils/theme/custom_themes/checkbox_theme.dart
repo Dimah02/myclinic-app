@@ -14,7 +14,7 @@ class KCheckboxTheme {
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return KColors.accentColor;
+        return KColors.primary;
       } else {
         return Colors.transparent;
       }

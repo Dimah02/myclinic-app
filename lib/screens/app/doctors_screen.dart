@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/models/doctor_model.dart';
+import 'package:myclinic/screens/app/doctor_profile_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class DoctorsScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class DoctorsScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: KColors.primary,
+                color: KColors.black,
               ),
             ),
           )
@@ -92,9 +93,12 @@ class _DoctorsListState extends State<DoctorsList> {
                                 hintText: "Search doctor",
                                 hintStyle: TextStyle(
                                   fontSize: 14,
-                                  color: KColors.secondary,
+                                  color: KColors.bestGrey,
                                 ),
-                                suffixIcon: Icon(Icons.search),
+                                suffixIcon: Icon(
+                                  Icons.search,
+                                  color: KColors.bestGrey,
+                                ),
                                 border: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Color(0xffEEEEEE)),
@@ -127,6 +131,7 @@ class _DoctorsListState extends State<DoctorsList> {
         }
         index -= 1;
         return DoctorCard(
+          id: searchResults![index].id!,
           name: searchResults![index].name!,
           specialty: searchResults![index].specialization!,
           reviews: searchResults![index].averageRating,
@@ -144,9 +149,11 @@ class DoctorCard extends StatelessWidget {
   final double reviews;
   final String openingTime;
   final String imagePath;
+  final String id;
 
   const DoctorCard({
     super.key,
+    required this.id,
     required this.name,
     required this.specialty,
     required this.reviews,
@@ -156,105 +163,118 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        color: Colors.white,
-        border: Border.all(
-          color: KColors.secondary.withOpacity(0.2),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        children: [
-          Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return DoctorProfileScreen(
+                id: id,
+              );
+            },
+          ));
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            color: Colors.white,
+            border: Border.all(
+              color: KColors.bestGrey.withOpacity(0.2),
+              width: 1,
+            ),
+          ),
+          child: Column(
             children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundColor: KColors.secondary.withOpacity(0.15),
-                backgroundImage: NetworkImage(imagePath),
-                onBackgroundImageError: (exception, stackTrace) =>
-                    const SizedBox(),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: KColors.bestGrey.withOpacity(0.15),
+                    backgroundImage: NetworkImage(imagePath),
+                    onBackgroundImageError: (exception, stackTrace) =>
+                        const SizedBox(),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: KColors.black),
+                      ),
+                      Text(
+                        specialty,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: KColors.bestGrey,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
               const SizedBox(
-                width: 12,
+                height: 8,
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Divider(
+                color: KColors.bestGrey.withOpacity(0.5),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: KColors.primary),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color(0xffFEB052),
+                        size: 20,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        "${reviews.toStringAsFixed(1)} Reviews",
+                        style: const TextStyle(
+                          color: Color(0xffFEB052),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    specialty,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: KColors.secondary,
-                    ),
-                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.access_time,
+                        color: KColors.primary,
+                        size: 20,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        "Open at $openingTime AM",
+                        style: const TextStyle(
+                            fontSize: 12, color: KColors.primary),
+                      ),
+                    ],
+                  )
                 ],
               )
             ],
           ),
-          const SizedBox(
-            height: 8,
-          ),
-          Divider(
-            color: KColors.secondary.withOpacity(0.5),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Icon(
-                    Icons.star,
-                    color: Color(0xffFEB052),
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "${reviews.toStringAsFixed(1)} Reviews",
-                    style: const TextStyle(
-                      color: Color(0xffFEB052),
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.access_time,
-                    color: KColors.accentColor,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "Open at $openingTime AM",
-                    style: const TextStyle(
-                        fontSize: 12, color: KColors.accentColor),
-                  ),
-                ],
-              )
-            ],
-          )
-        ],
+        ),
       ),
     );
   }

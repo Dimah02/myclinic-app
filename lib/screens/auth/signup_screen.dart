@@ -106,7 +106,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ? _form()
             : const Center(
                 child: CircularProgressIndicator(
-                  color: KColors.accentColor,
+                  color: KColors.primary,
                 ),
               ),
       ),
@@ -198,7 +198,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     _isPasswordVisible
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: KColors.secondary,
+                    color: KColors.bestGrey,
                   ),
                   onPressed: () {
                     setState(() {
@@ -230,7 +230,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     _isPasswordVisible2
                         ? Icons.visibility
                         : Icons.visibility_off,
-                    color: KColors.secondary,
+                    color: KColors.bestGrey,
                   ),
                   onPressed: () {
                     setState(() {

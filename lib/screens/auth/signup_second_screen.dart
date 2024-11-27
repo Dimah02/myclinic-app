@@ -125,7 +125,7 @@ class _SignupSecondScreenState extends State<SignupSecondScreen> {
             ? _form(context)
             : const Center(
                 child: CircularProgressIndicator(
-                  color: KColors.accentColor,
+                  color: KColors.primary,
                 ),
               ),
       ),
@@ -164,7 +164,7 @@ class _SignupSecondScreenState extends State<SignupSecondScreen> {
                   height: 24,
                   width: 24,
                   child: Radio<String>(
-                    activeColor: KColors.accentColor,
+                    activeColor: KColors.primary,
                     value: 'Female',
                     groupValue: _gender,
                     onChanged: (value) {
@@ -188,7 +188,7 @@ class _SignupSecondScreenState extends State<SignupSecondScreen> {
                   height: 24,
                   width: 24,
                   child: Radio<String>(
-                    activeColor: KColors.accentColor,
+                    activeColor: KColors.primary,
                     value: 'Male',
                     groupValue: _gender,
                     onChanged: (value) {
@@ -346,7 +346,7 @@ class _SignupSecondScreenState extends State<SignupSecondScreen> {
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 16),
-                foregroundColor: KColors.accentColor, // button text color
+                foregroundColor: KColors.primary, // button text color
               ),
             ),
           ),

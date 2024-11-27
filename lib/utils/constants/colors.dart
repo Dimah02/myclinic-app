@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class KColors {
   KColors._();
   // App Basic Colors
-  static const secondary = Color(0xff85849B);
+  static const bestGrey = Color(0xff85849B);
 
   // Text Colors
   static const Color textPrimary = Color(0xff333333);
@@ -18,8 +18,9 @@ class KColors {
   // new colors
   static const Color primaryGray =
       Color(0xff0B0A37); // add .withOpacity(0.20) when using it
-  static const Color primary = Color(0xff2A456A);
-  static const Color accentColor = Color(0xff4894FE);
+  static const Color primary = Color(0xff019BFE);
+  static const Color secondary = Color(0xff6bc2fa);
+  static const Color accent = Color(0xffb1dbf6);
 
   // Background Container Colors
   static const lightContainer = Color(0xfff6f6f6);

@@ -22,7 +22,10 @@ class NavigationMenu extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
               onPressed: () {},
-              icon: const Icon(Icons.history_rounded),
+              icon: const Icon(
+                Icons.history_rounded,
+                color: KColors.bestGrey,
+              ),
             ),
           ),
         ],
@@ -35,7 +38,7 @@ class NavigationMenu extends StatelessWidget {
           onTap: (index) {
             controller.selectedIndex.value = index;
           },
-          selectedItemColor: KColors.accentColor,
+          selectedItemColor: KColors.primary,
           unselectedItemColor: const Color(0xff484C52),
           showUnselectedLabels: true,
           selectedLabelStyle: const TextStyle(fontSize: 11),
@@ -48,8 +51,8 @@ class NavigationMenu extends StatelessWidget {
               icon: Icon(
                 Icons.home,
                 color: controller.selectedIndex.value == 0
-                    ? KColors.accentColor
-                    : KColors.secondary,
+                    ? KColors.primary
+                    : KColors.bestGrey,
                 size: 24,
               ),
               backgroundColor: Colors.transparent,
@@ -59,8 +62,8 @@ class NavigationMenu extends StatelessWidget {
               icon: Icon(
                 Icons.add,
                 color: controller.selectedIndex.value == 1
-                    ? KColors.accentColor
-                    : KColors.secondary,
+                    ? KColors.primary
+                    : KColors.bestGrey,
                 size: 24,
               ),
               backgroundColor: Colors.transparent,
@@ -70,8 +73,8 @@ class NavigationMenu extends StatelessWidget {
               icon: Icon(
                 Icons.medication_sharp,
                 color: controller.selectedIndex.value == 2
-                    ? KColors.accentColor
-                    : KColors.secondary,
+                    ? KColors.primary
+                    : KColors.bestGrey,
                 size: 24,
               ),
               backgroundColor: Colors.transparent,
@@ -81,8 +84,8 @@ class NavigationMenu extends StatelessWidget {
               icon: Icon(
                 Icons.person,
                 color: controller.selectedIndex.value == 3
-                    ? KColors.accentColor
-                    : KColors.secondary,
+                    ? KColors.primary
+                    : KColors.bestGrey,
                 size: 24,
               ),
               backgroundColor: Colors.transparent,

@@ -7,10 +7,10 @@ class KElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
       elevation: 0,
       foregroundColor: Colors.white,
-      backgroundColor: KColors.accentColor,
+      backgroundColor: KColors.primary,
       disabledForegroundColor: Colors.grey,
       disabledBackgroundColor: Colors.grey,
-      side: const BorderSide(color: KColors.accentColor),
+      side: const BorderSide(color: KColors.primary),
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       textStyle: const TextStyle(
           fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),

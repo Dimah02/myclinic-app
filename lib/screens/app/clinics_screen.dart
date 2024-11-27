@@ -24,7 +24,7 @@ class ClinicsScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: KColors.primary,
+                        color: KColors.black,
                       ),
                     ),
                   )
@@ -36,7 +36,7 @@ class ClinicsScreen extends StatelessWidget {
             } else {
               return const Center(
                 child: CircularProgressIndicator(
-                  color: KColors.accentColor,
+                  color: KColors.primary,
                 ),
               );
             }
@@ -106,9 +106,12 @@ class _CategoryListState extends State<CategoryList> {
                                 hintText: "Search for a Clinic",
                                 hintStyle: TextStyle(
                                   fontSize: 14,
-                                  color: KColors.secondary,
+                                  color: KColors.bestGrey,
                                 ),
-                                suffixIcon: Icon(Icons.search),
+                                suffixIcon: Icon(
+                                  Icons.search,
+                                  color: KColors.bestGrey,
+                                ),
                                 border: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Color(0xffEEEEEE)),

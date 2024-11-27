@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/utils/constants/colors.dart';
-
 import 'custom_themes/appbar_theme.dart';
 import 'custom_themes/bottom_sheet_theme.dart';
 import 'custom_themes/checkbox_theme.dart';
@@ -15,9 +14,9 @@ class KAppTheme {
   KAppTheme._();
   static ThemeData lighTheme = ThemeData(
     useMaterial3: true,
-    fontFamily: 'Poppins',
+    fontFamily: "Manrope",
     brightness: Brightness.light,
-    primaryColor: KColors.accentColor,
+    primaryColor: KColors.primary,
     scaffoldBackgroundColor: Colors.white,
     textTheme: KTextTheme.lightTextTheme,
     elevatedButtonTheme: KElevatedButtonTheme.lightElevatedButtonTheme,

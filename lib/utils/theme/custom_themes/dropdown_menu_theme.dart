@@ -15,14 +15,14 @@ class KDropdownMenuTheme {
         .copyWith(fontSize: 12, color: KColors.primary.withOpacity(0.5)),
     errorStyle:
         const TextStyle().copyWith(fontSize: 12, fontStyle: FontStyle.normal),
-    floatingLabelStyle: const TextStyle().copyWith(color: KColors.accentColor),
+    floatingLabelStyle: const TextStyle().copyWith(color: KColors.primary),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(width: 1, color: KColors.accentColor),
+      borderSide: const BorderSide(width: 1, color: KColors.primary),
     ),
     enabledBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(width: 1, color: KColors.accentColor),
+      borderSide: const BorderSide(width: 1, color: KColors.primary),
     ),
     focusedBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),

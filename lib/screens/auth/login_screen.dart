@@ -99,7 +99,7 @@ class LoginScreenState extends State<LoginScreen> {
                     },
                     child: const Text(
                       "Signup",
-                      style: TextStyle(color: KColors.accentColor),
+                      style: TextStyle(color: KColors.primary),
                     ),
                   )
                 ],
@@ -116,7 +116,7 @@ class LoginScreenState extends State<LoginScreen> {
               )
             : const Center(
                 child: CircularProgressIndicator(
-                  color: KColors.accentColor,
+                  color: KColors.primary,
                 ),
               ),
       ),
@@ -157,7 +157,7 @@ class LoginScreenState extends State<LoginScreen> {
               suffixIcon: IconButton(
                 icon: Icon(
                   _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: KColors.secondary,
+                  color: KColors.bestGrey,
                 ),
                 onPressed: () {
                   setState(() {
@@ -192,7 +192,7 @@ class LoginScreenState extends State<LoginScreen> {
                 child: const Text(
                   "Forgot password?",
                   style: TextStyle(
-                    color: KColors.accentColor,
+                    color: KColors.primary,
                   ),
                 ),
               ),

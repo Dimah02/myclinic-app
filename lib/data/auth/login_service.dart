@@ -99,6 +99,7 @@ class AuthenticationServices {
       }
 
       await _storeToken(res["user"]["token"]);
+
       await _storeID(res["user"]["id"]);
     } catch (e) {
       if (e.toString().contains("User not found")) throw "User not found";

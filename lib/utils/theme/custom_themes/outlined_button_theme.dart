@@ -7,8 +7,8 @@ class KOutlinedButtonTheme {
     style: OutlinedButton.styleFrom(
       elevation: 0,
       foregroundColor: KColors.primary,
-      side: const BorderSide(color: KColors.accentColor),
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      side: const BorderSide(color: KColors.primary),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       textStyle: const TextStyle(
           fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
