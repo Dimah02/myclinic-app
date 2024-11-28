@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myclinic/data/auth/login_service.dart';
-import 'package:myclinic/screens/auth/reset_password_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 import 'package:myclinic/utils/helpers/validation.dart';
 
@@ -110,7 +109,6 @@ class LoginScreenState extends State<LoginScreen> {
               ),
             )
           : null,
-      appBar: AppBar(),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -133,6 +131,12 @@ class LoginScreenState extends State<LoginScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Center(
+            child: Image.asset(
+              "assets/images/logo5.png",
+              height: MediaQuery.of(context).size.height * 0.35,
+            ),
+          ),
           const Text(
             "Log into account",
             style: TextStyle(
@@ -182,26 +186,26 @@ class LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResetPasswordPage(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "Forgot password?",
-                  style: TextStyle(
-                    color: KColors.primary,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     GestureDetector(
+          //       onTap: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => ResetPasswordPage(),
+          //           ),
+          //         );
+          //       },
+          //       child: const Text(
+          //         "Forgot password?",
+          //         style: TextStyle(
+          //           color: KColors.primary,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

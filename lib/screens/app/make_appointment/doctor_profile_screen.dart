@@ -21,7 +21,9 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Docotr Profile"),
+      ),
       body: FutureBuilder(
           future: GetDoctorService().getDoctor(id: widget.id!),
           builder: (context, snapshot) {
@@ -79,7 +81,6 @@ class DoctorProfile extends StatelessWidget {
                   width: 70,
                   height: 70,
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 143, 188, 224),
                     shape: BoxShape.circle,
                   ),
                   child: ClipOval(

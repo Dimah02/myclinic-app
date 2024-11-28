@@ -38,14 +38,18 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          "Book an appointment",
+        ),
+      ),
       body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Text(
-                "Book an appointment",
+                "Choose date and time",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 24),

@@ -160,9 +160,11 @@ class _CategoryListState extends State<CategoryList> {
                   borderRadius: BorderRadius.circular(12)),
               child: ListTile(
                 leading: Image.network(
+                  height: 50,
+                  width: 50,
                   searchResults![index].image!,
                   errorBuilder: (context, error, stackTrace) =>
-                      const Text("Error"),
+                      const SizedBox(),
                 ),
                 title: Text(searchResults![index].name!),
               ),

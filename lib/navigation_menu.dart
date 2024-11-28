@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:myclinic/screens/app/make_appointment/clinics_screen.dart';
 import 'package:myclinic/screens/app/home/history_screen.dart';
 import 'package:myclinic/screens/app/home/home_screen.dart';
+import 'package:myclinic/screens/app/pharmacy/pharmacy_category.dart';
 import 'package:myclinic/screens/app/profile/profile_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
@@ -16,8 +17,12 @@ class NavigationMenu extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: const Padding(
-            padding: EdgeInsets.only(left: 8.0), child: Text("My Clinic")),
+        title: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Image.asset(
+              "assets/images/logo4.png",
+              height: 50,
+            )),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -112,7 +117,7 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     const ClinicsScreen(),
-    Container(),
+    const PharmacyCategoryScreen(),
     const ProfileScreen(),
   ];
 }
