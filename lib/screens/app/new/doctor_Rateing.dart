@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: RateDoctorScreen(),
-    );
-  }
-}
-
 class RateDoctorScreen extends StatelessWidget {
   const RateDoctorScreen({super.key});
 
@@ -32,7 +17,8 @@ class RateDoctorScreen extends StatelessWidget {
         centerTitle: false,
         foregroundColor: Colors.black,
       ),
-      body: SingleChildScrollView( // Added to make the content scrollable
+      body: SingleChildScrollView(
+        // Added to make the content scrollable
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -52,23 +38,25 @@ class RateDoctorScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Row(
+                child: const Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 35,
                       backgroundImage: NetworkImage(
                           'https://png.pngtree.com/png-vector/20230928/ourmid/pngtree-young-afro-professional-doctor-png-image_10148632.png'),
                     ),
-                    const SizedBox(width: 16),
-                    Expanded( // Added to prevent overflow of text in small screens
+                    SizedBox(width: 16),
+                    Expanded(
+                      // Added to prevent overflow of text in small screens
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             'Dr. Joseph Brostito',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis, // Handles text overflow
+                            overflow:
+                                TextOverflow.ellipsis, // Handles text overflow
                           ),
                           Text(
                             'Dental Specialist',

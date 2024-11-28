@@ -64,9 +64,13 @@ class LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             width: 12.0,
           ),
-          Text(
-            message,
-            style: const TextStyle(color: Colors.white),
+          Row(
+            children: [
+              Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ],
           ),
         ],
       ),

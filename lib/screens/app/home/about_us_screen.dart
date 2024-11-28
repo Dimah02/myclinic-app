@@ -16,8 +16,18 @@ class AboutUsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Clinic Image
-              Image.network(
-                  'https://github.com/dimaphotos/photo/blob/main/clinic.jpg?raw=true'),
+              Container(
+                height: 228,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                        'https://github.com/dimaphotos/photo/blob/main/clinic.jpg?raw=true'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
 
               // Title
               const SizedBox(height: 20),

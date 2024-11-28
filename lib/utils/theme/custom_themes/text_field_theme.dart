@@ -8,24 +8,23 @@ class KTextFieldTheme {
     errorMaxLines: 3,
     prefixIconColor: KColors.primary,
     suffixIconColor: KColors.primary,
-    labelStyle:
-        const TextStyle().copyWith(fontSize: 12, color: KColors.primary),
+    labelStyle: const TextStyle().copyWith(fontSize: 12, color: KColors.black),
     hintStyle: const TextStyle()
-        .copyWith(fontSize: 12, color: KColors.primary.withOpacity(0.5)),
+        .copyWith(fontSize: 12, color: KColors.black.withOpacity(0.5)),
     errorStyle:
         const TextStyle().copyWith(fontSize: 12, fontStyle: FontStyle.normal),
-    floatingLabelStyle: const TextStyle().copyWith(color: KColors.primary),
+    floatingLabelStyle: const TextStyle().copyWith(color: KColors.black),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(width: 1, color: KColors.primary),
+      borderSide: const BorderSide(width: 1, color: KColors.black),
     ),
     enabledBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(width: 1, color: KColors.primary),
+      borderSide: const BorderSide(width: 1, color: KColors.black),
     ),
     focusedBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(width: 1, color: KColors.primary),
+      borderSide: const BorderSide(width: 1, color: KColors.black),
     ),
     errorBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(12),

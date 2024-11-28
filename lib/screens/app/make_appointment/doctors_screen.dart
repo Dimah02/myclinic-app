@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/models/doctor_model.dart';
-import 'package:myclinic/screens/app/doctor_profile_screen.dart';
+import 'package:myclinic/screens/app/make_appointment/doctor_profile_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class DoctorsScreen extends StatelessWidget {
@@ -67,78 +67,81 @@ class _DoctorsListState extends State<DoctorsList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: searchResults == null ? 1 : searchResults!.length + 1,
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ...widget.header,
-              widget.searchbar == true
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 24.0, right: 24),
-                          child: SizedBox(
-                            height: 50,
-                            child: TextField(
-                              onChanged: onQueryChanged,
-                              decoration: const InputDecoration(
-                                hintText: "Search doctor",
-                                hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: KColors.bestGrey,
+    return Scaffold(
+      body: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: searchResults == null ? 1 : searchResults!.length + 1,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ...widget.header,
+                widget.searchbar == true
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 24.0, right: 24),
+                            child: SizedBox(
+                              height: 50,
+                              child: TextField(
+                                onChanged: onQueryChanged,
+                                decoration: const InputDecoration(
+                                  hintText: "Search doctor",
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: KColors.bestGrey,
+                                  ),
+                                  suffixIcon: Icon(
+                                    Icons.search,
+                                    color: KColors.bestGrey,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xffEEEEEE)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12))),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xffEEEEEE)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12))),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xffEEEEEE)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12))),
                                 ),
-                                suffixIcon: Icon(
-                                  Icons.search,
-                                  color: KColors.bestGrey,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffEEEEEE)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffEEEEEE)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffEEEEEE)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        )
-                      ],
-                    )
-                  : const SizedBox(
-                      height: 24,
-                    ),
-            ],
+                          const SizedBox(
+                            height: 24,
+                          )
+                        ],
+                      )
+                    : const SizedBox(
+                        height: 24,
+                      ),
+              ],
+            );
+          }
+          index -= 1;
+          return DoctorCard(
+            id: searchResults![index].id!,
+            name: searchResults![index].name!,
+            specialty: searchResults![index].specialization!,
+            reviews: searchResults![index].averageRating,
+            openingTime: "9:00",
+            imagePath: searchResults![index].photo!,
           );
-        }
-        index -= 1;
-        return DoctorCard(
-          id: searchResults![index].id!,
-          name: searchResults![index].name!,
-          specialty: searchResults![index].specialization!,
-          reviews: searchResults![index].averageRating,
-          openingTime: "9:00",
-          imagePath: searchResults![index].photo!,
-        );
-      },
+        },
+      ),
     );
   }
 }

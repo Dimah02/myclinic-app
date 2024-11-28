@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myclinic/screens/app/clinics_screen.dart';
-import 'package:myclinic/screens/app/history_screen.dart';
-import 'package:myclinic/screens/app/home_screen.dart';
-import 'package:myclinic/screens/app/profile_screen.dart';
+import 'package:myclinic/screens/app/make_appointment/clinics_screen.dart';
+import 'package:myclinic/screens/app/home/history_screen.dart';
+import 'package:myclinic/screens/app/home/home_screen.dart';
+import 'package:myclinic/screens/app/profile/profile_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class NavigationMenu extends StatelessWidget {

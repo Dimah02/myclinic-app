@@ -26,7 +26,7 @@ class Main extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: FToastBuilder(),
       theme: KAppTheme.lighTheme,
-      initialRoute: '/navigationmenu',
+      initialRoute: '/',
       routes: {
         '/': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),

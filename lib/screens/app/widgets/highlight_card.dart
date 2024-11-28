@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myclinic/screens/app/about_us_screen.dart';
+import 'package:myclinic/screens/app/home/about_us_screen.dart';
 
 class HighlightCard extends StatelessWidget {
   const HighlightCard({super.key});
@@ -12,8 +12,10 @@ class HighlightCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        image: const DecorationImage(
-          image: NetworkImage(
+        image: DecorationImage(
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.41), BlendMode.srcOver),
+          image: const NetworkImage(
               'https://github.com/dimaphotos/photo/blob/main/clinic.jpg?raw=true'),
           fit: BoxFit.fill,
         ),
@@ -23,22 +25,18 @@ class HighlightCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             ' Your Health, Our Priority ',
             style: TextStyle(
-              backgroundColor:
-                  const Color.fromARGB(255, 5, 67, 105).withOpacity(0.5),
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 4),
-          Text(
+          const Text(
             ' Caring for You, Every Step of the Way',
             style: TextStyle(
-              backgroundColor:
-                  const Color.fromARGB(255, 5, 67, 105).withOpacity(0.5),
               color: Colors.white,
               fontSize: 14,
             ),

@@ -1,4 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:myclinic/data/auth/user.dart';
+import 'package:myclinic/models/user_model.dart';
 import 'package:myclinic/utils/http/http.dart';
 
 class AuthenticationServices {
@@ -35,6 +37,7 @@ class AuthenticationServices {
         },
       );
       print(res);
+      User().setUser(UserModel.fromJson(res["user"]));
       await _storeToken(res["user"]["token"]);
       await _storeID(res["user"]["id"]);
     } catch (e) {
@@ -97,11 +100,14 @@ class AuthenticationServices {
       if (res["message"] != null) {
         throw res["message"];
       }
-
+      print(res);
+      User().setUser(UserModel.fromJson(res["user"]));
+      print("--------------");
       await _storeToken(res["user"]["token"]);
 
       await _storeID(res["user"]["id"]);
     } catch (e) {
+      print(e.toString());
       if (e.toString().contains("User not found")) throw "User not found";
       throw "Password is incorrect";
     }

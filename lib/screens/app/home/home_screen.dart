@@ -1,33 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:myclinic/common/loaders/full_screen_loader.dart';
+import 'package:myclinic/data/app/cancel_appointment.dart';
 import 'package:myclinic/data/app/get_appointmets.dart';
+import 'package:myclinic/data/auth/user.dart';
 import 'package:myclinic/models/appointment_model.dart';
+import 'package:myclinic/screens/app/widgets/highlight_card.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: FutureBuilder(
-          future: GetAppointmentService().getHistory(),
+          future: GetAppointmentService().getCurrentAppointments(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return AppointmentsList(
                 app: snapshot.data,
-                header: const [
+                header: [
                   Padding(
-                    padding: EdgeInsets.only(top: 24.0, left: 24, right: 24),
+                    padding:
+                        const EdgeInsets.only(top: 24.0, left: 24, right: 24),
                     child: Text(
-                      "Appointments History",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: KColors.black,
-                      ),
+                      "Hello, ${User().getUser()!.name!.split(" ")[0]}",
+                      style: const TextStyle(
+                          fontSize: 20,
+                          color: KColors.black,
+                          fontWeight: FontWeight.bold),
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Divider(
+                    color: KColors.bestGrey.withOpacity(0.3),
+                    thickness: 2,
+                    endIndent: 24,
+                    indent: 24,
+                  ),
+                  const HighlightCard(),
+                  Padding(
+                      padding:
+                          const EdgeInsets.only(top: 24.0, left: 24, right: 24),
+                      child: Text(
+                        snapshot.data!.isNotEmpty
+                            ? "Your Current Appointments"
+                            : "No Appointments yet",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: KColors.black,
+                        ),
+                      ))
                 ],
               );
             } else if (snapshot.hasError) {
@@ -143,6 +169,7 @@ class _AppointmentsListState extends State<AppointmentsList> {
         }
         index -= 1;
         return AppointmentCard(
+            app: searchResults![index],
             doctorName: searchResults![index].docotrName!,
             doctorTitle: searchResults![index].doctorSpecialization!,
             doctorImage: searchResults![index].photo!,
@@ -161,9 +188,11 @@ class AppointmentCard extends StatelessWidget {
   final DateTime appointmentDate;
   final String appointmentTime;
   final String appointmentStatus;
+  final AppointmentModel app;
 
   const AppointmentCard({
     super.key,
+    required this.app,
     required this.doctorName,
     required this.doctorTitle,
     required this.doctorImage,
@@ -185,26 +214,44 @@ class AppointmentCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: NetworkImage(
-                      doctorImage), // Use cached_network_image if needed
-                ),
-                const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(
-                      doctorName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          doctorImage), // Use cached_network_image if needed
                     ),
-                    Text(doctorTitle),
+                    const SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          doctorName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(doctorTitle),
+                      ],
+                    ),
                   ],
                 ),
+                GestureDetector(
+                  onTap: () {
+                    _showAlertDialog(context,
+                        doctorName: doctorName,
+                        date: appointmentDate.toString().split(" ")[0],
+                        time: appointmentTime,
+                        appID: app.id!);
+                  },
+                  child: Text(
+                    "Cancle",
+                    style: TextStyle(color: Colors.red.shade600),
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 16),
@@ -264,6 +311,72 @@ class AppointmentCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showAlertDialog(
+    BuildContext context, {
+    required String doctorName,
+    required String date,
+    required String time,
+    required String appID,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text(
+            "Are you sure you want to cancel this appointment?",
+            style: TextStyle(color: KColors.primary, fontSize: 16),
+          ),
+          content: SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Doctor: $doctorName"),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text("Date: $date"),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text("Time: $time"),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            OutlinedButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Confirm'),
+              onPressed: () async {
+                // Handle the confirm action
+                try {
+                  CancelAppointmentService service = CancelAppointmentService();
+                  KFullScreenLoader.openLoadingDialog(context,
+                      text: "Cancelling Your Appointment");
+                  await service.cancelAppointment(appID: appID);
+                  if (context.mounted) {
+                    KFullScreenLoader.stopLoading(context);
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    KFullScreenLoader.stopLoading(context);
+                  }
+                }
+                if (context.mounted) Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

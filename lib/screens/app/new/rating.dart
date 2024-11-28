@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: PatientFeedbackScreen(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
-
 class PatientFeedbackScreen extends StatelessWidget {
   const PatientFeedbackScreen({super.key});
 

@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/models/appointment_model.dart';
-import 'package:myclinic/screens/app/widgets/highlight_card.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: FutureBuilder(
-          future: GetAppointmentService().getCurrentAppointments(),
+          future: GetAppointmentService().getHistory(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return AppointmentsList(
                 app: snapshot.data,
                 header: const [
-                  HighlightCard(),
                   Padding(
                     padding: EdgeInsets.only(top: 24.0, left: 24, right: 24),
                     child: Text(
-                      "Your Current Appointments",
+                      "Appointments History",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -175,6 +174,7 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool red = appointmentStatus.toLowerCase() == "cancelled" ? true : false;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -251,12 +251,14 @@ class AppointmentCard extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {}, // Implement button functionality
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: KColors.accent,
-                    side: const BorderSide(color: KColors.accent)),
-                child: const Text(
-                  "Details",
+                    backgroundColor:
+                        !red ? KColors.accent : Colors.red.shade100,
+                    side: BorderSide(
+                        color: !red ? KColors.accent : Colors.red.shade100)),
+                child: Text(
+                  appointmentStatus.toUpperCase(),
                   style: TextStyle(
-                    color: KColors.primary,
+                    color: red ? Colors.red.shade800 : KColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

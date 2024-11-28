@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/data/app/get_category.dart';
 import 'package:myclinic/models/clinic_model.dart';
-import 'package:myclinic/screens/app/doctors_screen.dart';
+import 'package:myclinic/screens/app/make_appointment/doctors_screen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class ClinicsScreen extends StatelessWidget {
