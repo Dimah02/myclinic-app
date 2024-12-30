@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:myclinic/models/appointment_model.dart';
 import 'package:myclinic/utils/http/http.dart';
 
-class GetAppointmentService {
+class GetAppointmentService extends ChangeNotifier {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
+
+  List<AppointmentModel>? _appointmetns;
 
   Future<String?> getToken() async {
     return await _storage.read(key: 'token');
@@ -12,6 +15,8 @@ class GetAppointmentService {
   Future<String?> getID() async {
     return await _storage.read(key: 'id');
   }
+
+  List<AppointmentModel>? get appointmetns => _appointmetns;
 
   Future<List<AppointmentModel>> getCurrentAppointments() async {
     try {
@@ -25,6 +30,9 @@ class GetAppointmentService {
       for (var appointment in res['appointments']) {
         app.add(AppointmentModel.fromJson(appointment));
       }
+
+      _appointmetns = app;
+      notifyListeners();
 
       return app;
     } catch (e) {
