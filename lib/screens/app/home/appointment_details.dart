@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/common/loaders/full_screen_loader.dart';
 import 'package:myclinic/data/app/cancel_appointment.dart';
+import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/models/appointment_model.dart';
 import 'package:myclinic/utils/constants/colors.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentDetails extends StatefulWidget {
-  const AppointmentDetails(
-      {super.key, required this.app, required this.action});
+  const AppointmentDetails({super.key, required this.app});
   final AppointmentModel app;
-  final Null Function() action;
 
   @override
   State<AppointmentDetails> createState() => _AppointmentDetailsState();
@@ -256,21 +256,20 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                       text: "Cancelling Your Appointment");
                   await service.cancelAppointment(appID: appID);
                   if (context.mounted) {
-                    widget.action();
                     KFullScreenLoader.stopLoading(context);
                   }
                 } catch (e) {
                   if (context.mounted) {
-                    widget.action();
                     KFullScreenLoader.stopLoading(context);
                   }
                 }
                 if (context.mounted) {
-                  widget.action();
                   Navigator.of(context)
                     ..pop()
                     ..pop();
-                  widget.action();
+                  await Provider.of<GetAppointmentService>(context,
+                          listen: false)
+                      .getCurrentAppointments();
                 }
               },
             ),

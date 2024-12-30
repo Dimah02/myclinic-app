@@ -83,7 +83,7 @@ class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24, top: 24),
+      padding: const EdgeInsets.only(left: 24.0, right: 24, top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -127,8 +127,8 @@ class _CategoryListState extends State<CategoryList> {
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // number of items in each row
-                mainAxisSpacing: 32.0, // spacing between rows
+                crossAxisCount: 2, // number of items in each row
+                //mainAxisSpacing: 32.0, // spacing between rows
                 crossAxisSpacing: 8, // spacing between columns
               ),
               physics: const BouncingScrollPhysics(),
@@ -144,21 +144,23 @@ class _CategoryListState extends State<CategoryList> {
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.only(bottom: 32),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(24),
                         color: const Color(0xffCCEBFF).withOpacity(0.22)),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          height: 50,
-                          width: 50,
+                          height: 70,
+                          width: 70,
                           searchResults![index].image!,
                           errorBuilder: (context, error, stackTrace) =>
                               const SizedBox(),
                         ),
                         Text(
                           searchResults![index].name!,
-                          style: const TextStyle(fontSize: 10),
+                          style: const TextStyle(fontSize: 14),
                           textAlign: TextAlign.center,
                         ),
                       ],
