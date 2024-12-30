@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myclinic/common/loaders/full_screen_loader.dart';
-import 'package:myclinic/data/app/cancel_appointment.dart';
 import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/data/auth/user.dart';
 import 'package:myclinic/models/appointment_model.dart';
+import 'package:myclinic/screens/app/home/appointment_details.dart';
 import 'package:myclinic/screens/app/widgets/highlight_card.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
@@ -169,6 +168,9 @@ class _AppointmentsListState extends State<AppointmentsList> {
         }
         index -= 1;
         return AppointmentCard(
+            action: () {
+              setState(() {});
+            },
             app: searchResults![index],
             doctorName: searchResults![index].docotrName!,
             doctorTitle: searchResults![index].doctorSpecialization!,
@@ -181,7 +183,7 @@ class _AppointmentsListState extends State<AppointmentsList> {
   }
 }
 
-class AppointmentCard extends StatelessWidget {
+class AppointmentCard extends StatefulWidget {
   final String doctorName;
   final String doctorTitle;
   final String doctorImage;
@@ -189,10 +191,12 @@ class AppointmentCard extends StatelessWidget {
   final String appointmentTime;
   final String appointmentStatus;
   final AppointmentModel app;
+  final Null Function() action;
 
   const AppointmentCard({
     super.key,
     required this.app,
+    required this.action,
     required this.doctorName,
     required this.doctorTitle,
     required this.doctorImage,
@@ -201,6 +205,11 @@ class AppointmentCard extends StatelessWidget {
     required this.appointmentStatus,
   });
 
+  @override
+  State<AppointmentCard> createState() => _AppointmentCardState();
+}
+
+class _AppointmentCardState extends State<AppointmentCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -220,38 +229,30 @@ class AppointmentCard extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: NetworkImage(
-                          doctorImage), // Use cached_network_image if needed
+                      backgroundImage: NetworkImage(widget
+                          .doctorImage), // Use cached_network_image if needed
                     ),
                     const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          doctorName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        SizedBox(
+                          width: 220,
+                          child: Text(
+                            widget.doctorName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Text(doctorTitle),
+                        Text(widget.doctorTitle),
                       ],
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    _showAlertDialog(context,
-                        doctorName: doctorName,
-                        date: appointmentDate.toString().split(" ")[0],
-                        time: appointmentTime,
-                        appID: app.id!);
-                  },
-                  child: Text(
-                    "Cancle",
-                    style: TextStyle(color: Colors.red.shade600),
-                  ),
-                )
               ],
             ),
             const SizedBox(height: 16),
@@ -271,7 +272,7 @@ class AppointmentCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      '${appointmentDate.day}/${appointmentDate.month}',
+                      '${widget.appointmentDate.day}/${widget.appointmentDate.month}',
                       style: const TextStyle(
                           fontSize: 14, color: KColors.bestGrey),
                     ),
@@ -283,7 +284,7 @@ class AppointmentCard extends StatelessWidget {
                         size: 18, color: KColors.bestGrey),
                     const SizedBox(width: 8),
                     Text(
-                      appointmentTime,
+                      widget.appointmentTime,
                       style: const TextStyle(
                           fontSize: 14, color: KColors.bestGrey),
                     ),
@@ -295,15 +296,27 @@ class AppointmentCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {}, // Implement button functionality
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return AppointmentDetails(
+                        action: () {
+                          setState(() {});
+                          widget.action();
+                        },
+                        app: widget.app,
+                      );
+                    },
+                  ));
+                }, // Implement button functionality
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: KColors.accent,
-                    side: const BorderSide(color: KColors.accent)),
-                child: Text(
-                  appointmentStatus.toUpperCase(),
-                  style: const TextStyle(
+                    backgroundColor: const Color(0xff63B4FF).withOpacity(0.1),
+                    side: BorderSide(
+                        color: const Color(0xff63B4FF).withOpacity(0.1))),
+                child: const Text(
+                  "Details",
+                  style: TextStyle(
                     color: KColors.primary,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -311,72 +324,6 @@ class AppointmentCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Future<void> _showAlertDialog(
-    BuildContext context, {
-    required String doctorName,
-    required String date,
-    required String time,
-    required String appID,
-  }) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          title: const Text(
-            "Are you sure you want to cancel this appointment?",
-            style: TextStyle(color: KColors.primary, fontSize: 16),
-          ),
-          content: SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Doctor: $doctorName"),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text("Date: $date"),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text("Time: $time"),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            OutlinedButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Confirm'),
-              onPressed: () async {
-                // Handle the confirm action
-                try {
-                  CancelAppointmentService service = CancelAppointmentService();
-                  KFullScreenLoader.openLoadingDialog(context,
-                      text: "Cancelling Your Appointment");
-                  await service.cancelAppointment(appID: appID);
-                  if (context.mounted) {
-                    KFullScreenLoader.stopLoading(context);
-                  }
-                } catch (e) {
-                  if (context.mounted) {
-                    KFullScreenLoader.stopLoading(context);
-                  }
-                }
-                if (context.mounted) Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }
