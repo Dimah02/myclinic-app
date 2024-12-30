@@ -18,7 +18,9 @@ class ClinicsScreen extends StatelessWidget {
                 clinics: snapshot.data,
                 header: const [
                   Padding(
-                    padding: EdgeInsets.only(top: 24.0, left: 24, right: 24),
+                    padding: EdgeInsets.only(
+                      top: 24.0,
+                    ),
                     child: Text(
                       "Clinics Category",
                       style: TextStyle(
@@ -80,98 +82,94 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: searchResults == null ? 1 : searchResults!.length + 1,
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ...widget.header,
-              widget.searchbar == true
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 24,
+    return Padding(
+      padding: const EdgeInsets.only(left: 24.0, right: 24, top: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...widget.header,
+          widget.searchbar == true
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 24.0, bottom: 24),
+                  child: SizedBox(
+                    height: 50,
+                    child: TextField(
+                      onChanged: onQueryChanged,
+                      decoration: const InputDecoration(
+                        hintText: "Search for a Clinic",
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          color: KColors.bestGrey,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 24.0, right: 24),
-                          child: SizedBox(
-                            height: 50,
-                            child: TextField(
-                              onChanged: onQueryChanged,
-                              decoration: const InputDecoration(
-                                hintText: "Search for a Clinic",
-                                hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: KColors.bestGrey,
-                                ),
-                                suffixIcon: Icon(
-                                  Icons.search,
-                                  color: KColors.bestGrey,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffEEEEEE)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffEEEEEE)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffEEEEEE)),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                              ),
-                            ),
-                          ),
+                        suffixIcon: Icon(
+                          Icons.search,
+                          color: KColors.bestGrey,
                         ),
-                        const SizedBox(
-                          height: 24,
-                        )
-                      ],
-                    )
-                  : const SizedBox(
-                      height: 24,
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xffEEEEEE)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                      ),
                     ),
-            ],
-          );
-        }
-        index -= 1;
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 12, left: 24, right: 24),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute<void>(builder: (BuildContext context) {
-                return DoctorsScreen(docotrs: searchResults![index].doctors!);
-              }));
-            },
-            child: Container(
-              padding:
-                  const EdgeInsets.only(bottom: 8, left: 12, right: 12, top: 8),
-              decoration: BoxDecoration(
-                  border: Border.all(color: KColors.primary.withOpacity(0.2)),
-                  borderRadius: BorderRadius.circular(12)),
-              child: ListTile(
-                leading: Image.network(
-                  height: 50,
-                  width: 50,
-                  searchResults![index].image!,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const SizedBox(),
+                  ),
+                )
+              : const SizedBox(
+                  height: 24,
                 ),
-                title: Text(searchResults![index].name!),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // number of items in each row
+                mainAxisSpacing: 32.0, // spacing between rows
+                crossAxisSpacing: 8, // spacing between columns
               ),
+              physics: const BouncingScrollPhysics(),
+              itemCount: searchResults == null ? 0 : searchResults!.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                      return DoctorsScreen(
+                          docotrs: searchResults![index].doctors!);
+                    }));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: const Color(0xffCCEBFF).withOpacity(0.22)),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          height: 50,
+                          width: 50,
+                          searchResults![index].image!,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const SizedBox(),
+                        ),
+                        Text(
+                          searchResults![index].name!,
+                          style: const TextStyle(fontSize: 10),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
