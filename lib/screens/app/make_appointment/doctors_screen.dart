@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/models/doctor_model.dart';
-import 'package:myclinic/screens/app/make_appointment/doctor_profile_screen.dart';
 import 'package:myclinic/screens/app/make_appointment/widgets/doctor_card.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 

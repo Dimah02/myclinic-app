@@ -50,8 +50,10 @@ class GetAppointmentService extends ChangeNotifier {
         token: token,
       );
       List<AppointmentModel> app = [];
-      for (var appointment in res['appointments']) {
-        app.add(AppointmentModel.fromJson(appointment));
+      if (res['appointments'] != null) {
+        for (var appointment in res['appointments']) {
+          app.add(AppointmentModel.fromJson(appointment));
+        }
       }
 
       return app;

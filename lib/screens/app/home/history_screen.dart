@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/screens/app/home/widgets/history_appointment_list.dart';
 import 'package:myclinic/utils/constants/colors.dart';
+import 'package:provider/provider.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -11,7 +12,8 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: FutureBuilder(
-          future: GetAppointmentService().getHistory(),
+          future: Provider.of<GetAppointmentService>(context, listen: false)
+              .getHistory(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return HistoryAppointmentsList(
