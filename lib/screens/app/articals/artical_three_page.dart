@@ -12,6 +12,7 @@ class AsthmaPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,8 +21,8 @@ class AsthmaPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
               child: Image.network(
                 "https://thumbs.dreamstime.com/b/nutritional-food-heart-health-wellness-cholesterol-diet-healthy-nutrition-eating-clean-fruits-nutritional-food-207935188.jpg",
-                width: 500,
-                height: 500,
+                width: double.infinity,
+                height: 300,
                 fit: BoxFit.cover,
               ),
             ),
@@ -29,7 +30,7 @@ class AsthmaPage extends StatelessWidget {
             const Text(
               "Breaking Down Asthma: Causes and Symptoms",
               style: TextStyle(
-                fontSize: 50.0,
+                fontSize: 36.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -12,6 +12,7 @@ class HypertensionPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,8 +21,8 @@ class HypertensionPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
               child: Image.network(
                 "https://cdn.pixabay.com/photo/2016/08/10/20/26/blood-pressure-1584223_1280.jpg",
-                width: 500,
-                height: 500,
+                width: double.infinity,
+                height: 300,
                 fit: BoxFit.cover,
               ),
             ),
@@ -29,7 +30,7 @@ class HypertensionPage extends StatelessWidget {
             const Text(
               "Hypertension: The Silent Killer",
               style: TextStyle(
-                fontSize: 50.0,
+                fontSize: 36.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -29,20 +29,20 @@ class ArticleCard extends StatelessWidget {
         elevation: 4,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Row(
+          child: Column(
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 6.0,
-                          backgroundColor: categoryColor,
-                        ),
-                        const SizedBox(width: 12.0),
-                        Text(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 6.0,
+                        backgroundColor: categoryColor,
+                      ),
+                      const SizedBox(width: 12.0),
+                      Expanded(
+                        child: Text(
                           category,
                           style: TextStyle(
                             color: categoryColor,
@@ -50,34 +50,44 @@ class ArticleCard extends StatelessWidget {
                             fontSize: 16.0,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 12.0),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
                       ),
-                    ),
-                    const SizedBox(height: 12.0),
-                    Text(
-                      time,
-                      style:
-                          const TextStyle(color: Colors.grey, fontSize: 14.0),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                  const SizedBox(height: 12.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            const SizedBox(height: 12.0),
+                            Text(
+                              time,
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 14.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Image.network(
+                        imageUrl,
+                        width: 140,
+                        height: 140,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const SizedBox(width: 16.0),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  imageUrl,
-                  width: 140,
-                  height: 140,
-                  fit: BoxFit.cover,
-                ),
               ),
             ],
           ),

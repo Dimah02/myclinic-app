@@ -12,6 +12,7 @@ class DiabetesPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,8 +21,8 @@ class DiabetesPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
               child: Image.network(
                 "https://thumbs.dreamstime.com/b/red-heart-shape-medical-stethoscope-light-background-top-view-health-care-medicare-cardiology-concept-blue-104679825.jpg",
-                width: 500,
-                height: 500,
+                width: double.infinity,
+                height: 300,
                 fit: BoxFit.cover,
               ),
             ),
@@ -29,7 +30,7 @@ class DiabetesPage extends StatelessWidget {
             const Text(
               "Diabetes Management: Tips for a Healthier Life",
               style: TextStyle(
-                fontSize: 50.0,
+                fontSize: 36.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

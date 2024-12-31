@@ -19,42 +19,43 @@ class ArticlesPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.grey.shade200,
-                    ),
-                    child: const Text(
-                      'Doctors',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8.0),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.blue.shade50,
-                    ),
-                    child: const Text(
-                      'Articles',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding:
+          //       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: [
+          //       Expanded(
+          //         child: TextButton(
+          //           onPressed: () {},
+          //           style: TextButton.styleFrom(
+          //             backgroundColor: Colors.grey.shade200,
+          //           ),
+          //           child: const Text(
+          //             'Doctors',
+          //             style: TextStyle(color: Colors.grey),
+          //           ),
+          //         ),
+          //       ),
+          //       const SizedBox(width: 8.0),
+          //       Expanded(
+          //         child: TextButton(
+          //           onPressed: () {},
+          //           style: TextButton.styleFrom(
+          //             backgroundColor: Colors.blue.shade50,
+          //           ),
+          //           child: const Text(
+          //             'Articles',
+          //             style: TextStyle(color: Colors.blue),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Expanded(
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.all(16.0),
               children: [
                 ArticleCard(
@@ -107,16 +108,6 @@ class ArticlesPage extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );
