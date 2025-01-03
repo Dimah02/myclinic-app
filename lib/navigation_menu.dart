@@ -17,13 +17,30 @@ class NavigationMenu extends StatelessWidget {
       appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          title: Obx(() => Text(
-                controller.titles[controller.selectedIndex.value],
-                style: const TextStyle(
-                    fontSize: 18,
-                    color: Color(0xff2A456A),
-                    fontWeight: FontWeight.w500),
-              ))),
+          title: Row(
+            children: [
+              const SizedBox(
+                width: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Image.asset(
+                  "assets/images/logoruba2.png",
+                  height: 40,
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Obx(() => Text(
+                    controller.titles[controller.selectedIndex.value],
+                    style: const TextStyle(
+                        fontSize: 18,
+                        color: Color(0xff2A456A),
+                        fontWeight: FontWeight.w500),
+                  )),
+            ],
+          )),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           iconSize: 24,
@@ -90,7 +107,7 @@ class NavigationController extends GetxController {
     const ProfileScreen(),
   ];
   final titles = [
-    "",
+    "QuickCare ASU",
     "Clinics Category",
     "Pharmacy",
     "Profile",

@@ -7,8 +7,8 @@ class UserModel {
   String? birthDate;
   String? allergyToMedications;
   String? medicalHistory;
-  int? height;
-  int? weight;
+  String? height;
+  String? weight;
 
   UserModel({
     required this.name,
@@ -33,8 +33,8 @@ class UserModel {
       birthDate: json['birth_date'] ?? '',
       allergyToMedications: json['allergy_to_medications'] ?? '',
       medicalHistory: json['medical_history'] ?? '',
-      height: json['height'] ?? 0,
-      weight: json['weight'] ?? 0,
+      height: json['height'] ?? '',
+      weight: json['weight'] ?? '',
     );
   }
 }

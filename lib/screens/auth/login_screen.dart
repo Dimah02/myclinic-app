@@ -111,7 +111,7 @@ class LoginScreenState extends State<LoginScreen> {
           : null,
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24 * 3),
         child: (loading == false)
             ? SingleChildScrollView(
                 child: _form(context),
@@ -133,17 +133,16 @@ class LoginScreenState extends State<LoginScreen> {
         children: [
           Center(
             child: Image.asset(
-              "assets/images/logo5.png",
-              height: MediaQuery.of(context).size.height * 0.35,
+              "assets/images/logoruba.png",
+              //width: MediaQuery.of(context).size.width * 0.35,
             ),
           ),
           const Text(
             "Log into account",
             style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+                fontSize: 24,
+                color: KColors.black,
+                fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 32),
           TextFormField(

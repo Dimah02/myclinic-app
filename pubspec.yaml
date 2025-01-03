@@ -63,10 +63,10 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/images/logo4.png"
+  image_path: "assets/images/logoruba3.png"
   min_sdk_android: 24 
   adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/images/logo4.png"
+  adaptive_icon_foreground: "assets/images/logoruba3.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
