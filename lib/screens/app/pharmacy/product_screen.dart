@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PharmacyScreen extends StatefulWidget {
-  const PharmacyScreen({super.key});
+class ProductScreen extends StatefulWidget {
+  const ProductScreen({super.key});
 
   @override
-  State<PharmacyScreen> createState() => _PharmacyScreenState();
+  State<ProductScreen> createState() => _ProductScreenState();
 }
 
-class _PharmacyScreenState extends State<PharmacyScreen> {
+class _ProductScreenState extends State<ProductScreen> {
   int quantity = 1;
 
   void incrementQuantity() {

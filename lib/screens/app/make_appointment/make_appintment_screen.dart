@@ -53,6 +53,10 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
       appBar: AppBar(
         title: const Text(
           "Book an appointment",
+          style: TextStyle(
+              fontSize: 18,
+              color: Color(0xff2A456A),
+              fontWeight: FontWeight.w500),
         ),
       ),
       body: Padding(
@@ -160,7 +164,7 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
                 ),
               ),
               const SizedBox(
-                height: 64,
+                height: 32 + 16,
               ),
               SizedBox(
                 width: double.infinity,
@@ -169,7 +173,10 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
                       await _showAlertDialog(context);
                     },
                     child: const Text("Confirm")),
-              )
+              ),
+              const SizedBox(
+                height: 32 + 16,
+              ),
             ]),
           )),
     );

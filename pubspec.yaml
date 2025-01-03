@@ -84,6 +84,8 @@ flutter:
     - assets/fonts/static/
     - assets/images/
     - assets/clinics/
+    - assets/pharmacy/
+    
   fonts:
     - family: Manrope
       fonts:

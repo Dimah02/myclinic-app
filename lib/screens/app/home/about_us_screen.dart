@@ -7,7 +7,13 @@ class AboutUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About Us'),
+        title: const Text(
+          'About Us',
+          style: TextStyle(
+              fontSize: 18,
+              color: Color(0xff2A456A),
+              fontWeight: FontWeight.w500),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -22,8 +28,7 @@ class AboutUsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: const DecorationImage(
-                    image: NetworkImage(
-                        'https://github.com/dimaphotos/photo/blob/main/clinic.jpg?raw=true'),
+                    image: AssetImage('assets/images/clinic.jpg'),
                     fit: BoxFit.fill,
                   ),
                 ),

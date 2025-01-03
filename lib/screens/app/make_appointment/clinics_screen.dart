@@ -16,21 +16,7 @@ class ClinicsScreen extends StatelessWidget {
             if (snapshot.hasData) {
               return CategoryList(
                 clinics: snapshot.data,
-                header: const [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 24.0,
-                    ),
-                    child: Text(
-                      "Clinics Category",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: KColors.black,
-                      ),
-                    ),
-                  )
-                ],
+                header: const [],
                 searchbar: true,
               );
             } else if (snapshot.hasError) {
@@ -83,7 +69,7 @@ class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24, top: 16),
+      padding: const EdgeInsets.only(left: 24.0, right: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

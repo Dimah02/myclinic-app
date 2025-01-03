@@ -19,7 +19,13 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Docotr Profile"),
+        title: const Text(
+          "Doctor Profile",
+          style: TextStyle(
+              fontSize: 18,
+              color: Color(0xff2A456A),
+              fontWeight: FontWeight.w500),
+        ),
       ),
       body: FutureBuilder(
           future: GetDoctorService().getDoctor(id: widget.id!),

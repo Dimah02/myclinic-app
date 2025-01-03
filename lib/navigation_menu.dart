@@ -15,15 +15,15 @@ class NavigationMenu extends StatelessWidget {
     final controller = Get.put(NavigationController());
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Image.asset(
-              "assets/images/logo4.png",
-              height: 50,
-            )),
-      ),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          title: Obx(() => Text(
+                controller.titles[controller.selectedIndex.value],
+                style: const TextStyle(
+                    fontSize: 18,
+                    color: Color(0xff2A456A),
+                    fontWeight: FontWeight.w500),
+              ))),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           iconSize: 24,
@@ -88,5 +88,11 @@ class NavigationController extends GetxController {
     const ClinicsScreen(),
     const PharmacyCategoryScreen(),
     const ProfileScreen(),
+  ];
+  final titles = [
+    "",
+    "Clinics Category",
+    "Pharmacy",
+    "Profile",
   ];
 }

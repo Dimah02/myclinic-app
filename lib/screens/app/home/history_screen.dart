@@ -11,7 +11,13 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Appointments History"),
+        title: const Text(
+          "Appointments History",
+          style: TextStyle(
+              fontSize: 18,
+              color: Color(0xff2A456A),
+              fontWeight: FontWeight.w500),
+        ),
       ),
       body: FutureBuilder(
           future: Provider.of<GetAppointmentService>(context, listen: false)

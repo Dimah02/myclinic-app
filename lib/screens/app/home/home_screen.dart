@@ -33,8 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 app: snapshot.data,
                 header: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 24.0, left: 24, right: 24),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

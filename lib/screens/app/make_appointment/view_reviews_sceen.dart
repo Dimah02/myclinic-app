@@ -14,7 +14,13 @@ class ViewReviewsSceen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Reviews"),
+        title: const Text(
+          "Reviews",
+          style: TextStyle(
+              fontSize: 18,
+              color: Color(0xff2A456A),
+              fontWeight: FontWeight.w500),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

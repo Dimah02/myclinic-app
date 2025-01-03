@@ -10,24 +10,16 @@ class DoctorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: DoctorsList(
-        doctors: docotrs,
-        searchbar: true,
-        header: const [
-          Padding(
-            padding: EdgeInsets.only(top: 24.0, left: 24, right: 24),
-            child: Text(
-              "Relevant doctors",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: KColors.black,
-              ),
-            ),
-          )
-        ],
+      appBar: AppBar(
+        title: const Text(
+          "Relevant Doctors",
+          style: TextStyle(
+              fontSize: 18,
+              color: Color(0xff2A456A),
+              fontWeight: FontWeight.w500),
+        ),
       ),
+      body: DoctorsList(doctors: docotrs, searchbar: true, header: const []),
     );
   }
 }
