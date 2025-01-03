@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myclinic/models/doctor_model.dart';
 import 'package:myclinic/screens/app/make_appointment/doctor_profile_screen.dart';
+import 'package:myclinic/screens/app/make_appointment/view_reviews_sceen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -9,6 +11,7 @@ class DoctorCard extends StatelessWidget {
   final String openingTime;
   final String imagePath;
   final String id;
+  final DoctorModel d;
 
   const DoctorCard({
     super.key,
@@ -18,6 +21,7 @@ class DoctorCard extends StatelessWidget {
     required this.reviews,
     required this.openingTime,
     required this.imagePath,
+    required this.d,
   });
 
   @override
@@ -35,7 +39,7 @@ class DoctorCard extends StatelessWidget {
           ));
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             color: Colors.white,
@@ -45,6 +49,7 @@ class DoctorCard extends StatelessWidget {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
@@ -86,35 +91,47 @@ class DoctorCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 8,
+                height: 12,
               ),
               Divider(
-                color: KColors.bestGrey.withOpacity(0.5),
-              ),
-              const SizedBox(
-                height: 8,
+                color: KColors.bestGrey.withOpacity(0.2),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: Color(0xffFEB052),
-                        size: 20,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                          return ViewReviewsSceen(
+                            d: d,
+                            reviewList: d.reviews!,
+                          );
+                        },
+                      ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            color: Color(0xffFEB052),
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            "${reviews.toStringAsFixed(1)} Reviews",
+                            style: const TextStyle(
+                              color: Color(0xffFEB052),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "${reviews.toStringAsFixed(1)} Reviews",
-                        style: const TextStyle(
-                          color: Color(0xffFEB052),
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   Row(
                     children: [

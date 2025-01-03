@@ -6,6 +6,7 @@ import 'package:myclinic/navigation_menu.dart';
 import 'package:myclinic/screens/auth/login_screen.dart';
 import 'package:myclinic/screens/auth/signup_screen.dart';
 import 'package:myclinic/screens/auth/signup_second_screen.dart';
+import 'package:myclinic/utils/constants/colors.dart';
 import 'package:myclinic/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +35,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: KColors.primary,
       debugShowCheckedModeBanner: false,
       builder: FToastBuilder(),
       theme: KAppTheme.lighTheme,

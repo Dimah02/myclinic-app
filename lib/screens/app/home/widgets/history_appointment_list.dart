@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/models/appointment_model.dart';
-import 'package:myclinic/screens/app/home/widgets/history_appointment_card.dart';
+import 'package:myclinic/screens/app/home/widgets/appointment_card.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
 class HistoryAppointmentsList extends StatefulWidget {
@@ -102,7 +102,8 @@ class _HistoryAppointmentsListState extends State<HistoryAppointmentsList> {
           );
         }
         index -= 1;
-        return HistoryAppointmentCard(
+        return AppointmentCard(
+            app: searchResults![index],
             doctorName: searchResults![index].docotrName!,
             doctorTitle: searchResults![index].doctorSpecialization!,
             doctorImage: searchResults![index].photo!,

@@ -1,12 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:myclinic/data/app/get_doctor.dart';
 import 'package:myclinic/models/doctor_model.dart';
 import 'package:myclinic/screens/app/make_appointment/make_appintment_screen.dart';
-import 'package:myclinic/screens/app/make_appointment/make_review_sceen.dart';
-import 'package:myclinic/screens/app/make_appointment/view_reviews_sceen.dart';
 import 'package:myclinic/screens/app/make_appointment/widgets/service_card.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 
@@ -103,12 +99,12 @@ class DoctorProfile extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: KColors.black,
+                          color: Color(0xff4894FE),
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(
-                        height: 4,
+                        height: 8,
                       ),
                       Row(
                         children: [
@@ -124,7 +120,7 @@ class DoctorProfile extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 4,
+                        height: 8,
                       ),
                       const Row(
                         children: [
@@ -154,7 +150,7 @@ class DoctorProfile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: KColors.black,
+                color: Color(0xff4894FE),
               ),
             ),
             const SizedBox(height: 8),
@@ -168,7 +164,7 @@ class DoctorProfile extends StatelessWidget {
             const Text(
               'Services',
               style: TextStyle(
-                color: KColors.black,
+                color: Color(0xff4894FE),
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -179,7 +175,7 @@ class DoctorProfile extends StatelessWidget {
               children: [
                 Expanded(
                   child: ServiceCard(
-                      title: '${Random().nextInt(100) + 1}+',
+                      title: '${Random().nextInt(600) + 300}+',
                       subtitle: 'Patients'),
                 ),
                 const SizedBox(width: 16),
@@ -214,103 +210,6 @@ class DoctorProfile extends StatelessWidget {
             ),
             const SizedBox(
               height: 32,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Doctor Rating",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: KColors.black,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute<void>(
-                      builder: (BuildContext context) {
-                        return ViewReviewsSceen(
-                          reviewList: d.reviews ?? [],
-                        );
-                      },
-                    ));
-                  },
-                  child: const Text(
-                    "View Reviews",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: KColors.primary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "(${d.reviews!.length}) ",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: KColors.black,
-                  ),
-                ),
-                const Text(
-                  "total reviews",
-                  style: TextStyle(color: KColors.bestGrey),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Center(
-              child: RatingBar.builder(
-                initialRating: d.averageRating,
-                ignoreGestures: true,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (rating) {},
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Center(
-              child: Text(
-                "${d.averageRating}",
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: KColors.black),
-              ),
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return MakeReviewSceen(
-                        d: d,
-                        action: action,
-                      );
-                    },
-                  ));
-                },
-                child: const Text("Make A Review"),
-              ),
             ),
           ],
         ),

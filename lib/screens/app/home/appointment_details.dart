@@ -3,6 +3,7 @@ import 'package:myclinic/common/loaders/full_screen_loader.dart';
 import 'package:myclinic/data/app/cancel_appointment.dart';
 import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/models/appointment_model.dart';
+import 'package:myclinic/screens/app/make_appointment/make_review_sceen.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -167,9 +168,11 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                 Text(
                   widget.app.status!,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green.shade600,
+                    color: widget.app.status! != "Cancelled"
+                        ? Colors.green.shade600
+                        : Colors.red.shade600,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -178,28 +181,45 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
             const SizedBox(
               height: 72,
             ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  _showAlertDialog(context,
-                      doctorName: widget.app.docotrName!,
-                      date: widget.app.date.toString().split(" ")[0],
-                      time: widget.app.time!,
-                      appID: widget.app.id!);
-                }, // Implement button functionality
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red.shade700.withOpacity(0.1),
-                    side: BorderSide(
-                        color: Colors.red.shade700.withOpacity(0.1))),
-                child: Text(
-                  "Cancel Appointment",
-                  style: TextStyle(
-                    color: Colors.red.shade600,
+            if (widget.app.status! == "Booked")
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _showAlertDialog(context,
+                        doctorName: widget.app.docotrName!,
+                        date: widget.app.date.toString().split(" ")[0],
+                        time: widget.app.time!,
+                        appID: widget.app.id!);
+                  }, // Implement button functionality
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade700.withOpacity(0.1),
+                      side: BorderSide(
+                          color: Colors.red.shade700.withOpacity(0.1))),
+                  child: Text(
+                    "Cancel Appointment",
+                    style: TextStyle(
+                      color: Colors.red.shade600,
+                    ),
                   ),
                 ),
               ),
-            ),
+            if (widget.app.status! == "Completed")
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute<void>(
+                      builder: (BuildContext context) {
+                        return MakeReviewSceen(
+                          app: widget.app,
+                        );
+                      },
+                    ));
+                  },
+                  child: const Text("Make A Review"),
+                ),
+              ),
           ],
         ),
       ),

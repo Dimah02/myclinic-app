@@ -15,8 +15,7 @@ class HighlightCard extends StatelessWidget {
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.41), BlendMode.srcOver),
-          image: const NetworkImage(
-              'https://github.com/dimaphotos/photo/blob/main/clinic.jpg?raw=true'),
+          image: const AssetImage('assets/images/clinic.jpg'),
           fit: BoxFit.fill,
         ),
       ),

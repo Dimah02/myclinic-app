@@ -1,11 +1,13 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myclinic/common/loaders/full_screen_loader.dart';
 import 'package:myclinic/common/success_screen/success_screen.dart';
+import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/data/app/make_appointment.dart';
 import 'package:myclinic/models/doctor_model.dart';
 import 'package:myclinic/utils/constants/colors.dart';
-import 'package:myclinic/utils/helpers/validation.dart';
+import 'package:provider/provider.dart';
 
 class MakeAppintmentScreen extends StatefulWidget {
   const MakeAppintmentScreen(
@@ -22,6 +24,7 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
 
   final TextEditingController _date = TextEditingController();
   final TextEditingController _showedDate = TextEditingController();
+  DateTime _pickedDate = DateTime.now();
 
   final TextEditingController _stime = TextEditingController();
   final TextEditingController _etime = TextEditingController();
@@ -33,6 +36,15 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
     super.initState();
     fToast = FToast();
     fToast.init(context);
+    _date.text = DateTime.now().toString();
+    for (int i = 0; i < widget.app.length; i++) {
+      if (widget.app[i].date.toString().split(" ")[0] ==
+          DateTime.now().toString().split(" ")[0]) {
+        appointment = widget.app[i];
+        setState(() {});
+        return;
+      }
+    }
   }
 
   @override
@@ -46,27 +58,57 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
       body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Text(
                 "Choose date and time",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
+              // const SizedBox(height: 24),
+              // TextFormField(
+              //   readOnly: true,
+              //   onTap: () {
+              //     _selectData(context, _date);
+              //     setState(() {});
+              //   },
+              //   controller: _showedDate,
+              //   decoration: const InputDecoration(
+              //     labelText: "Date",
+              //   ),
+              //   validator: (value) =>
+              //       KValidator.validateEmptyText("Date", value),
+              // ),
               const SizedBox(height: 24),
-              TextFormField(
-                readOnly: true,
-                onTap: () {
-                  _selectData(context, _date);
+              CalendarDatePicker2(
+                config: CalendarDatePicker2Config(
+                  calendarType: CalendarDatePicker2Type.single,
+                  daySplashColor: Colors.transparent,
+                  selectedDayHighlightColor: KColors.primary,
+                  firstDate: DateTime(DateTime.now().year, DateTime.now().month,
+                      DateTime.now().day),
+                  lastDate: DateTime(DateTime.now().year, DateTime.now().month,
+                      DateTime.now().day + 30),
+                ),
+                value: [
+                  _pickedDate,
+                ],
+                onValueChanged: (picked) {
+                  _pickedDate = picked[0];
+                  _date.text = picked[0].toString();
+                  _showedDate.text = picked.toString().split(" ")[0];
+                  for (int i = 0; i < widget.app.length; i++) {
+                    if (widget.app[i].date.toString().split(" ")[0] ==
+                        _date.text.split(" ")[0]) {
+                      appointment = widget.app[i];
+                      setState(() {});
+                      return;
+                    }
+                  }
+                  appointment = null;
                   setState(() {});
                 },
-                controller: _showedDate,
-                decoration: const InputDecoration(
-                  labelText: "Date",
-                ),
-                validator: (value) =>
-                    KValidator.validateEmptyText("Date", value),
               ),
-              const SizedBox(height: 24),
               const Text(
                 "Available Time",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
@@ -226,6 +268,7 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
                     Navigator.of(context)
                       ..pop()
                       ..pop();
+
                     Navigator.push(context, MaterialPageRoute<void>(
                         builder: (BuildContext context) {
                       return SuccessScreen(
@@ -238,6 +281,11 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
                         },
                       );
                     }));
+                  }
+                  if (context.mounted) {
+                    await Provider.of<GetAppointmentService>(context,
+                            listen: false)
+                        .getCurrentAppointments();
                   }
                 } catch (e) {
                   if (context.mounted) {

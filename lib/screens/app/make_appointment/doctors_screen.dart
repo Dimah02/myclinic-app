@@ -133,6 +133,7 @@ class _DoctorsListState extends State<DoctorsList> {
           }
           index -= 1;
           return DoctorCard(
+            d: searchResults![index],
             id: searchResults![index].id!,
             name: searchResults![index].name!,
             specialty: searchResults![index].specialization!,

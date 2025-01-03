@@ -10,7 +10,9 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Appointments History"),
+      ),
       body: FutureBuilder(
           future: Provider.of<GetAppointmentService>(context, listen: false)
               .getHistory(),
@@ -18,19 +20,7 @@ class HistoryScreen extends StatelessWidget {
             if (snapshot.hasData) {
               return HistoryAppointmentsList(
                 app: snapshot.data,
-                header: const [
-                  Padding(
-                    padding: EdgeInsets.only(top: 24.0, left: 24, right: 24),
-                    child: Text(
-                      "Appointments History",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: KColors.black,
-                      ),
-                    ),
-                  )
-                ],
+                header: const [],
               );
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
