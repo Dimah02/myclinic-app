@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myclinic/data/auth/login_service.dart';
 import 'package:myclinic/data/auth/user.dart';
+import 'package:myclinic/navigation_menu.dart';
 import 'package:myclinic/utils/constants/colors.dart';
 import 'package:myclinic/utils/helpers/validation.dart';
 
@@ -240,81 +241,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 16),
 
-          enabled == true
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Gender: ",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: Radio<String>(
-                            activeColor: KColors.primary,
-                            value: 'Female',
-                            groupValue: _gender,
-                            onChanged: (value) {
-                              setState(() {
-                                _gender = value;
-                                _error = false;
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        const Text("Female"),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: Radio<String>(
-                            activeColor: KColors.primary,
-                            value: 'Male',
-                            groupValue: _gender,
-                            onChanged: (value) {
-                              setState(() {
-                                _gender = value;
-                                _error = false;
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        const Text("Male"),
-                      ],
-                    ),
-                    if (show == true)
-                      Column(
-                        children: [
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            " Gender is required",
-                            style: TextStyle(
-                                color: Colors.red.shade900, fontSize: 12),
-                          ),
-                        ],
-                      ),
-                  ],
-                )
-              : TextFormField(
+          if (enabled == true)
+            Column(
+              children: [
+                TextFormField(
                   enabled: enabled,
                   controller: _genderController,
                   decoration: const InputDecoration(
@@ -323,8 +253,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   validator: (value) =>
                       KValidator.validateEmptyText("Gender", value),
                 ),
-
-          const SizedBox(height: 16),
+                const SizedBox(height: 16),
+              ],
+            ),
 
           // Birthday
           TextFormField(
@@ -441,6 +372,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ElevatedButton(
                 onPressed: enabled == false
                     ? () {
+                        NavigationController.instance.selectedIndex.value = 0;
                         Navigator.pop(context);
                       }
                     : _register,

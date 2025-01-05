@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myclinic/data/app/get_appointmets.dart';
 import 'package:myclinic/navigation_menu.dart';
@@ -11,11 +12,16 @@ import 'package:myclinic/utils/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
+
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  Future.delayed(const Duration(seconds: 2));
+  FlutterNativeSplash.remove();
 
   runApp(
     /// Providers are above [MyApp] instead of inside it, so that tests

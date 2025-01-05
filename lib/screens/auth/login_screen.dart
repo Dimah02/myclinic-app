@@ -27,10 +27,11 @@ class LoginScreenState extends State<LoginScreen> {
         });
         await AuthenticationServices().login(
             password: _passwordController.text, email: _emailController.text);
-        setState(() {
-          loading = false;
-        });
-        Navigator.pushNamed(context, "/navigationmenu");
+
+        loading = false;
+        if (context.mounted) {
+          Navigator.pushNamed(context, "/navigationmenu");
+        }
       } catch (e) {
         setState(() {
           loading = false;
