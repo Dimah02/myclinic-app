@@ -11,10 +11,10 @@ class SignupSecondScreen extends StatefulWidget {
   });
 
   @override
-  _SignupSecondScreenState createState() => _SignupSecondScreenState();
+  SignupSecondScreenState createState() => SignupSecondScreenState();
 }
 
-class _SignupSecondScreenState extends State<SignupSecondScreen> {
+class SignupSecondScreenState extends State<SignupSecondScreen> {
   // Controllers
 
   final TextEditingController _birthdayController = TextEditingController();
@@ -74,12 +74,12 @@ class _SignupSecondScreenState extends State<SignupSecondScreen> {
         setState(() {
           loading = false;
         });
+
         Navigator.pushNamed(context, "/navigationmenu");
       } catch (e) {
         setState(() {
           loading = false;
         });
-        print(e);
         _showToast(e.toString());
       }
     }

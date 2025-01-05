@@ -28,8 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController _genderController = TextEditingController();
 
   bool loading = false;
-  String? _gender;
-  bool? _error = true, show = false, enabled = false;
+  bool? show = false, enabled = false;
   late FToast fToast;
   @override
   void initState() {
@@ -38,7 +37,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _lastNameController.text = User().getUser()!.name!.split(' ')[1];
     _emailController.text = User().getUser()!.email!;
     _birthdayController.text = User().getUser()!.birthDate!;
-    _gender = User().getUser()!.gender;
     _genderController.text = User().getUser()!.gender ?? '';
     _bloodTypeController.text = User().getUser()!.bloodType ?? '';
     _weightController.text = User().getUser()!.weight!.toString();
@@ -83,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
         child: (loading == false)
             ? SingleChildScrollView(
                 physics: const BouncingScrollPhysics(), child: _form(context))
@@ -99,46 +97,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _register() async {
     FocusScope.of(context).requestFocus(FocusNode());
 
-    if (_error == true) {
-      show = true;
-    } else {
-      show = false;
+    show = false;
+    setState(() {
+      loading = true;
+    });
+    try {
+      await AuthenticationServices().updateUser(
+        bloodType: (_bloodTypeController.text.isNotEmpty)
+            ? _bloodTypeController.text
+            : null,
+        birthDate: (_birthdayController.text.isNotEmpty)
+            ? _birthdayController.text
+            : null,
+        allergyToMedications: (_allergyController.text.isNotEmpty)
+            ? _allergyController.text
+            : null,
+        medicalHistory:
+            (_midicalHistory.text.isNotEmpty) ? _midicalHistory.text : null,
+        height:
+            (_heightController.text.isNotEmpty) ? _heightController.text : null,
+        weight:
+            (_weightController.text.isNotEmpty) ? _weightController.text : null,
+      );
+
       setState(() {
-        loading = true;
+        loading = false;
       });
-      try {
-        await AuthenticationServices().updateUser(
-          bloodType: (_bloodTypeController.text.isNotEmpty)
-              ? _bloodTypeController.text
-              : null,
-          birthDate: (_birthdayController.text.isNotEmpty)
-              ? _birthdayController.text
-              : null,
-          allergyToMedications: (_allergyController.text.isNotEmpty)
-              ? _allergyController.text
-              : null,
-          medicalHistory:
-              (_midicalHistory.text.isNotEmpty) ? _midicalHistory.text : null,
-          height: (_heightController.text.isNotEmpty)
-              ? _heightController.text
-              : null,
-          weight: (_weightController.text.isNotEmpty)
-              ? _weightController.text
-              : null,
-        );
-        setState(() {
-          loading = false;
-        });
-        enabled = false;
-        setState(() {});
-      } catch (e) {
-        setState(() {
-          loading = false;
-        });
-        print(e);
-        _showToast(e.toString());
-      }
+      enabled = false;
+      setState(() {});
+    } catch (e) {
+      setState(() {
+        loading = false;
+      });
+      _showToast(e.toString());
     }
+
     setState(() {});
   }
 
@@ -240,7 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           const SizedBox(height: 16),
 
-          if (enabled == true)
+          if (enabled == false)
             Column(
               children: [
                 TextFormField(

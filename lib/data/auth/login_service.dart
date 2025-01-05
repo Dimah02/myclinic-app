@@ -65,16 +65,19 @@ class AuthenticationServices {
         endpoint: "/user/update_info",
         body: {
           "id": id,
-          if (name != null) "name": name,
-          if (email != null) "email": email,
-          if (bloodType != null) "blood_type": bloodType,
-          if (gender != null) "gender": gender,
-          if (birthDate != null) "birth_date": birthDate,
-          if (allergyToMedications != null)
+          if (name != null && name.isNotEmpty) "name": name,
+          if (email != null && email.isNotEmpty) "email": email,
+          if (bloodType != null && bloodType.isNotEmpty)
+            "blood_type": bloodType,
+          if (gender != null && gender.isNotEmpty) "gender": gender,
+          if (birthDate != null && birthDate.isNotEmpty)
+            "birth_date": birthDate,
+          if (allergyToMedications != null && allergyToMedications.isNotEmpty)
             "allergy_to_medications": allergyToMedications,
-          if (medicalHistory != null) "medical_history": medicalHistory,
-          if (height != null) "height": height,
-          if (weight != null) "weight": weight,
+          if (medicalHistory != null && medicalHistory.isNotEmpty)
+            "medical_history": medicalHistory,
+          if (height != null && height.isNotEmpty) "height": height,
+          if (weight != null && weight.isNotEmpty) "weight": weight,
         },
         token: token,
       );
