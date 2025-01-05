@@ -36,7 +36,6 @@ class AuthenticationServices {
           "password": password,
         },
       );
-      print(res);
       User().setUser(UserModel.fromJson(res["user"]));
       await _storeToken(res["user"]["token"]);
       await _storeID(res["user"]["id"]);
@@ -62,7 +61,7 @@ class AuthenticationServices {
     try {
       String? token = await getToken();
       String? id = await getID();
-      dynamic res = await KHTTP.post(
+      await KHTTP.post(
         endpoint: "/user/update_info",
         body: {
           "id": id,
@@ -79,7 +78,6 @@ class AuthenticationServices {
         },
         token: token,
       );
-      print(res);
     } catch (e) {
       if (e.toString().contains("User already exists")) {
         throw "User already exists";
@@ -100,14 +98,11 @@ class AuthenticationServices {
       if (res["message"] != null) {
         throw res["message"];
       }
-      print(res);
       User().setUser(UserModel.fromJson(res["user"]));
-      print("--------------");
       await _storeToken(res["user"]["token"]);
 
       await _storeID(res["user"]["id"]);
     } catch (e) {
-      print(e.toString());
       if (e.toString().contains("User not found")) throw "User not found";
       throw "Password is incorrect";
     }

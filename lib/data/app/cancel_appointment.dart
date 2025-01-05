@@ -19,11 +19,9 @@ class CancelAppointmentService {
         endpoint: "/appointments/$appID/cancel",
         token: token,
       );
-      print(res);
 
       return res;
     } catch (e) {
-      print("Error: $e");
       throw Exception("Server Error: ${e.toString()}");
     }
   }

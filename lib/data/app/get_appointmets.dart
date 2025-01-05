@@ -36,7 +36,6 @@ class GetAppointmentService extends ChangeNotifier {
 
       return app;
     } catch (e) {
-      print("Error: $e");
       throw Exception("Server Error: ${e.toString()}");
     }
   }
@@ -58,7 +57,6 @@ class GetAppointmentService extends ChangeNotifier {
 
       return app;
     } catch (e) {
-      print("Error: $e");
       throw Exception("Server Error: ${e.toString()}");
     }
   }

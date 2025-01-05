@@ -30,11 +30,9 @@ class MakeAppointmentService {
           "time": time,
         },
       );
-      print(res);
 
       return res;
     } catch (e) {
-      print("Error: $e");
       throw Exception("Server Error: ${e.toString()}");
     }
   }

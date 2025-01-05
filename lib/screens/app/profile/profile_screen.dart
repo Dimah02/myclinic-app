@@ -111,7 +111,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           bloodType: (_bloodTypeController.text.isNotEmpty)
               ? _bloodTypeController.text
               : null,
-          gender: _gender!,
           birthDate: (_birthdayController.text.isNotEmpty)
               ? _birthdayController.text
               : null,

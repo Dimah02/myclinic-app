@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AppointmentConfirmationPage(),
     );
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class AppointmentConfirmationPage extends StatelessWidget {
+  const AppointmentConfirmationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,19 +26,16 @@ class AppointmentConfirmationPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-    
           CircleAvatar(
             radius: 50,
             backgroundColor: Colors.blue.withOpacity(0.1),
-            child: Icon(
+            child: const Icon(
               Icons.check,
               size: 50,
               color: Colors.blue,
             ),
           ),
           const SizedBox(height: 20),
-
-       
           const Text(
             "Your Appointment has been booked!",
             textAlign: TextAlign.center,
@@ -45,8 +46,6 @@ class AppointmentConfirmationPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-
-          
           const Text(
             "On December/22/2024\nAt 2:00PM",
             textAlign: TextAlign.center,
@@ -57,12 +56,8 @@ class AppointmentConfirmationPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-
-          
           GestureDetector(
-            onTap: () {
-           
-            },
+            onTap: () {},
             child: const Text(
               "Cancel Appointment?",
               style: TextStyle(
@@ -74,14 +69,10 @@ class AppointmentConfirmationPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-
-          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: ElevatedButton(
-              onPressed: () {
-             
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -103,8 +94,6 @@ class AppointmentConfirmationPage extends StatelessWidget {
           ),
         ],
       ),
-
-      
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         selectedItemColor: Colors.blue,

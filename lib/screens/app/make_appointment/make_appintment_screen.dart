@@ -182,49 +182,49 @@ class _MakeAppintmentScreenState extends State<MakeAppintmentScreen> {
     );
   }
 
-  Future<void> _selectData(
-      BuildContext context, TextEditingController date) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      firstDate: DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day),
-      lastDate: DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day + 7),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary:
-                  Color.fromARGB(255, 131, 162, 247), // header background color
-              onPrimary: Colors.black, // header text color
-              onSurface: KColors.primary, // body text color
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 16),
-                foregroundColor: KColors.primary, // button text color
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (picked != null) {
-      date.text = picked.toString();
-      _showedDate.text = picked.toString().split(" ")[0];
-      for (int i = 0; i < widget.app.length; i++) {
-        if (widget.app[i].date.toString().split(" ")[0] ==
-            date.text.split(" ")[0]) {
-          appointment = widget.app[i];
-          setState(() {});
-          return;
-        }
-      }
-      appointment = null;
-      setState(() {});
-    }
-  }
+  // Future<void> _selectData(
+  //     BuildContext context, TextEditingController date) async {
+  //   DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     firstDate: DateTime(
+  //         DateTime.now().year, DateTime.now().month, DateTime.now().day),
+  //     lastDate: DateTime(
+  //         DateTime.now().year, DateTime.now().month, DateTime.now().day + 7),
+  //     builder: (context, child) {
+  //       return Theme(
+  //         data: Theme.of(context).copyWith(
+  //           colorScheme: const ColorScheme.light(
+  //             primary:
+  //                 Color.fromARGB(255, 131, 162, 247), // header background color
+  //             onPrimary: Colors.black, // header text color
+  //             onSurface: KColors.primary, // body text color
+  //           ),
+  //           textButtonTheme: TextButtonThemeData(
+  //             style: TextButton.styleFrom(
+  //               textStyle: const TextStyle(fontSize: 16),
+  //               foregroundColor: KColors.primary, // button text color
+  //             ),
+  //           ),
+  //         ),
+  //         child: child!,
+  //       );
+  //     },
+  //   );
+  //   if (picked != null) {
+  //     date.text = picked.toString();
+  //     _showedDate.text = picked.toString().split(" ")[0];
+  //     for (int i = 0; i < widget.app.length; i++) {
+  //       if (widget.app[i].date.toString().split(" ")[0] ==
+  //           date.text.split(" ")[0]) {
+  //         appointment = widget.app[i];
+  //         setState(() {});
+  //         return;
+  //       }
+  //     }
+  //     appointment = null;
+  //     setState(() {});
+  //   }
+  // }
 
   Future<void> _showAlertDialog(BuildContext context) async {
     showDialog(
