@@ -29,9 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
             password: _passwordController.text, email: _emailController.text);
 
         loading = false;
-        if (context.mounted) {
-          Navigator.pushNamed(context, "/navigationmenu");
-        }
+        Navigator.pushNamed(context, "/navigationmenu");
       } catch (e) {
         setState(() {
           loading = false;

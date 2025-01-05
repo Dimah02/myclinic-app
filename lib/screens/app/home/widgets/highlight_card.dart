@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myclinic/screens/app/home/about_us_screen.dart';
+import 'package:myclinic/utils/constants/colors.dart';
 
 class HighlightCard extends StatelessWidget {
   const HighlightCard({super.key});
@@ -8,13 +9,13 @@ class HighlightCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(16),
-      height: 228,
+      height: 180,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.41), BlendMode.srcOver),
+              KColors.black.withOpacity(0.50), BlendMode.srcOver),
           image: const AssetImage('assets/images/clinic.jpg'),
           fit: BoxFit.fill,
         ),
@@ -37,6 +38,7 @@ class HighlightCard extends StatelessWidget {
             ' Caring for You, Every Step of the Way',
             style: TextStyle(
               color: Colors.white,
+              fontWeight: FontWeight.w600,
               fontSize: 14,
             ),
           ),

@@ -74,7 +74,6 @@ class SignupSecondScreenState extends State<SignupSecondScreen> {
         setState(() {
           loading = false;
         });
-
         Navigator.pushNamed(context, "/navigationmenu");
       } catch (e) {
         setState(() {
